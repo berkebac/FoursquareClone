@@ -90,7 +90,6 @@ class mapVC: UIViewController, MKMapViewDelegate,CLLocationManagerDelegate {
                 }else {
                     imageReference.downloadURL { url, error in
                         let imageurl = url?.absoluteString
-                        print(imageurl)
                         //Database
                         
                         let fireStoreDatabase = Firestore.firestore()

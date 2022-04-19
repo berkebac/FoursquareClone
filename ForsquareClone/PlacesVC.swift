@@ -12,6 +12,7 @@ class PlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
     
     var placeNameArray = [String]()
     var placeIdArray = [String]()
+    var selectedPlaceId = ""
     
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
@@ -29,6 +30,22 @@ class PlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource  {
         tableView.dataSource = self
         // Do any additional setup after loading the view.
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toDetailsVC" {
+            let destinationVC = segue.destination as! DetailsVC
+            destinationVC.chosenPlaceId = selectedPlaceId
+            
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedPlaceId = placeIdArray[indexPath.row]
+        self.performSegue(withIdentifier: "toDetailsVC", sender: nil)
+    }
+    
+    
+    
     
     func getDataFromFireStore () {
         
